@@ -1,3 +1,6 @@
+####
+Because the seventy-sixth template cannot be executed, we manually set it to a relatively large value of 10000.
+####
 Read 99 queries. Read 24 test queries.
 hint_set: 2 
 
