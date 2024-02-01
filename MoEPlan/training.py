@@ -34,7 +34,7 @@ class Args:
     dataset = 'job' # 'job' or 'tpcds'
     pretrain_len = 20
     k=3 # select
-    is_sampler=0 # true
+    is_sampler=1 # true
     cost_norm = Normalizer(0, 10)
     card_norm = Normalizer(1, 100)
 args = Args()
