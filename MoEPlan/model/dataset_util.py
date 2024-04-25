@@ -105,6 +105,12 @@ def get_dataset(args):
         workload = 'synthetic'
         f_path = ['./data/tpcds1gb.txt']
         aim_expert = [i for i in range(args.num_experts)]
+    elif(args.dataset == 'tpcds_new'):
+        data_path = './data/tpcds_new/'
+        database = 'tpcds_new'
+        workload = 'tpcdssplit'
+        f_path = ['./data/tpcdssplit.txt']
+        aim_expert = [i for i in range(args.num_experts)]
     else:
         print("wrong")
         print(z)# break
@@ -141,4 +147,6 @@ def get_dataset(args):
         ds_tpcds1gb= df_to_ds('job','job',tpcds_df,methods)
     elif(args.dataset == 'tpcds'):
         ds_tpcds1gb= df_to_ds('tpcds1gb','synthetic',tpcds_df,methods)
+    elif(args.dataset == 'tpcds_new'):
+        ds_tpcds1gb= df_to_ds('tpcds_new','tpcdssplit',tpcds_df,methods)
     return tpcds_df,ds_tpcds1gb
