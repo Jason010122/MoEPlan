@@ -228,6 +228,10 @@ def training_MoEPlan(model, ds_all, df_test, args,\
             # pretrain_select_data = torch.Tensor([df_test.iloc[:,1][i][0] for i in range(64)]).squeeze()# 1b~33b 1c~33c(no 24c 33c)
             # pretrain_select_data = torch.Tensor([df_test.iloc[:,1][i][0] for i in range(int(0.71*len(df_test)))]).squeeze()# 0.71*len(df_test) = 80
             pretrain_list = select_pretrain_list(pretrain_select_data,pretrain_len)
+        elif(args.dataset == "tpcds_new"):
+            # pretrain_select_data = torch.Tensor([df_test.iloc[:,1][i][0] for i in range(int(0.67*len(df_test)))]).squeeze()
+            pretrain_select_data = torch.Tensor([df_test.iloc[:,1][i][0] for i in range(int(0.66*len(df_test)))]).squeeze()
+            pretrain_list = select_pretrain_list(pretrain_select_data,pretrain_len)
         else:
             pretrain_select_data = torch.Tensor([df_test.iloc[:,1][i][0] for i in train_idxs[:int(0.8*len(train_idxs))]]).squeeze()
             pretrain_list = select_pretrain_list(pretrain_select_data,pretrain_len)
@@ -256,6 +260,8 @@ def training_MoEPlan(model, ds_all, df_test, args,\
             # valid_idxs1 = train_idxs[int(0.66*len(train_idxs)):int(0.71*len(train_idxs))]
         elif(args.dataset == "tpcds"):
             train_idxs1 = train_idxs[:int(0.8*len(train_idxs))]
+        elif(args.dataset == "tpcds_new"):
+            train_idxs1 = train_idxs[:int(0.67*len(train_idxs))]
         else:
             print("other dataset")
             return
@@ -318,6 +324,11 @@ def training_MoEPlan(model, ds_all, df_test, args,\
                 test_df = df_test.iloc[[j for j in range(int(0.71*len(ds_all)),len(ds_all))],:]
                 # time_start1 = time.time()
                 batch,batch_labels = collator(list(zip(*[ds_all[j] for j in range(int(0.71*len(ds_all)),len(ds_all))])))
+            elif(args.dataset == "tpcds_new"):
+                # time_end1 = time.time()
+                test_df = df_test.iloc[[j for j in range(int(0.67*len(ds_all)),len(ds_all))],:]
+                # time_start1 = time.time()
+                batch,batch_labels = collator(list(zip(*[ds_all[j] for j in range(int(0.67*len(ds_all)),len(ds_all))])))
             else:
                 print("wrong")
                 return
