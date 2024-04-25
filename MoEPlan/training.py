@@ -31,7 +31,7 @@ class Args:
     device = 'cuda:1'
     newpath = './results/full/cost/'
     to_predict = 'cost'
-    dataset = 'job' # 'job' or 'tpcds'
+    dataset = 'job' # 'job' or 'tpcds' or 'tpcds_new'
     pretrain_len = 20
     k=3 # select
     is_sampler=1 # true
